@@ -113,13 +113,58 @@ $ cordova plugin add cordova-plugin-flashlight
 $ cordova plugin
 ```
 ## Debug
-Desde un navegador basado en Chromium puedes abrir la dirección [brave://inspect/#devices](brave://inspect/#devices) que te dará acceso a las aplicaciones web que ejecutes en el emulador de Android o en tus dispositivos físicos en los que hayas habilitado la [depuración USB](https://developer.android.com/studio/debug/dev-options?hl=es).
+Desde un navegador basado en Chromium puedes abrir la dirección [chrome://inspect/#devices](chrome://inspect/#devices) que te dará acceso a las aplicaciones web que ejecutes en el emulador de Android o en tus dispositivos físicos en los que hayas habilitado la [depuración USB](https://developer.android.com/studio/debug/dev-options?hl=es).
 
 ## Ejemplo Svelte-Cordova
-Disponemos de plantillas para iniciar fácilmente proyectos Svelte para empaquetar en Cordova. Puedes encontrarlos en GitHub. Un ejemplo es yonip/svelte-cordova-template
+Disponemos de plantillas para iniciar fácilmente proyectos Svelte para empaquetar en Cordova. Puedes encontrarlos en GitHub. Un ejemplo es yonip/svelte-cordova-template. Tienes las instrucciones en [la página del proyecto](https://github.com/syonip/svelte-cordova).
+
+Veamos el proceso de creación del ejemplo adjunto en la carpeta *Ejemplo*:
+
+Creamos un clon de la plantilla.
 ```bash
-npx degit syonip/svelte-cordova-template Ejemplo
-cd Ejemplo
-npm install
+$ npx degit syonip/svelte-cordova-template Ejemplo
 ```
-Sigue las [instrucciones](https://github.com/syonip/svelte-cordova) para trabajar con Svelte dentro de una aplicación de Cordova.
+Instalamos los módulos mediante *NPM*:
+```bash
+$ cd Ejemplo
+$ pwd
+/home/.../Ejemplo
+$ npm install
+$ cd src-cordova
+$ pwd
+/home/.../Ejemplo/src-cordova
+$ npm install
+```
+Instalamos la plataforma *Android* para *Cordova.*. Instalamos el plugin que necesitaremos para este proyecto.
+```bash
+$ pwd
+/home/.../Ejemplo/src-cordova
+$ cordova platform add android
+$ cordova platform
+$ cordova plugin add cordova-plugin-fingerprint-aio
+$ cordova plugin
+```
+Arrancamos la plantilla de la aplicación en el simulador. Si en el primer intento no funciona, mantén el simulador iniciado y repite la instrucción.
+```bash
+$ cd ../
+$ pwd
+/home/.../Ejemplo
+$ npm run dev-android
+```
+Puedes abrir un navegador basado en Chromium para depurar la aplicación accediendo a la dirección: [chrome://inspect/#devices](chrome://inspect/#devices)
+
+Puedes consultar el código en el fichero `src/App.svelte` y la documentación del plugin [en su web](https://www.npmjs.com/package/cordova-plugin-ebw-fingerprint-aio) para ver el funcionamiento de la aplicación.
+
+Especialmente importante es el uso de `document.addEventListener` que permite diferir la ejecución de métodos de los plugins de *Cordova* al momento en que se ha terminado de cargar la aplicación.
+
+Cuando ejecutamos nuestras aplicaciones en dispositivos físicos nunca podemos saber a priori si el dispositivo soporta las capacidades necesarias para nuestra aplicación. Normalmente los plugins dispondrán de algún método que permite comprobar este extremo. En el ejemplo el método `Fingerprint.isAvailable` permite comprobar si el dispositivo dispone de mecanismos de reconocimiento biométricos y están configurados para poder ser empleados.
+
+Finalizada la aplicación, podemos obtener el APK para la instalación de la misma 
+```bash
+Ctrl+C
+$ pwd
+/home/.../Ejemplo
+$ npm run build-android
+Built the following apk(s): 
+        /home/.../Ejemplo/src-cordova/platforms/android/app/build/outputs/apk/debug/app-debug.apk
+```

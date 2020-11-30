@@ -2,25 +2,38 @@
 	export let name;
 	export let ready = false;
 
-	var callState = 0;
+	var bioCompatible = false;
+	var autenticado = false;
 
 	document.addEventListener("deviceready", () => {
 		ready = true;
-	})
+		Fingerprint.isAvailable(isAvailableSuccess, isAvailableError);
+ 	})
 
-	function updateCallState () {
-		an_sensors.getDeviceNetwokActivity(
-			function(res) {
-				callState = res;
-			},
-			function(res) {
-				console.error("Error form cordova sensors plugin");
-			}
-		);
+	function isAvailableSuccess(result) {
+		console.log('Compatible con autenticación biometrica');
+		bioCompatible = true;
+	}
+	
+	function isAvailableError(error) {
+		console.log('NO coompatible con autenticación biometrica: ', error.message);
 	}
 
-	setInterval(updateCallState,1000);
+	function autenticate () {
+		Fingerprint.show({
+		description: "Identifícate"
+		}, successCallback, errorCallback);
+	}
 
+    function successCallback(){
+		console.log("Autenticado correctamente");
+		autenticado = true;
+    }
+ 
+    function errorCallback(error){
+		console.log("Error en la autenticación:", error.message);
+	}
+	
 </script>
 
 
@@ -31,7 +44,17 @@
 	<h2>Waiting for cordova deviceready</h2>
 {/if}
 
-{callState}
+{#if ready && bioCompatible}
+<button on:click={autenticate}>Autenticate</button>
+{:else}
+<p>El dispositivo no es compatible con autenticación biométrica.</p>
+{/if}
+
+{#if autenticado}
+<img alt="Autenticado" src="lockOpened.svg"/>
+{:else}	
+<img alt="No autenticado" src="lockClosed.svg"/>
+{/if}
 
 <style>
 	h1 {

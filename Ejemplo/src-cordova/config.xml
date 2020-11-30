@@ -9,8 +9,7 @@
     </author>
     <hook src="../node_modules/svelte-cordova/before-prepare.js" type="before_prepare" />
     <hook src="../node_modules/svelte-cordova/after-run.js" type="after_run" />
-    <content src="http://192.168.1.134:5000" />
-    <allow-navigation href="http://192.168.1.134:5000" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
