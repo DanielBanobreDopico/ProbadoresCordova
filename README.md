@@ -27,7 +27,20 @@ Ahora busca este otro icono: ![](imgs/SDK%20Manager.png). Es el administrador de
 ```bash
 $ sudo apt install gradle
 ```
-
+#### Variables de entorno de sistema
+Necesitamos establecer un par de variables de sistema para indicar a otras herramientas en donde encontrar el SDK de Android y el ejecutable de Gradle. Abrimos el archivo de configuración del entorno de usuario:
+```bash
+$ gedit ~/.bashrc
+```
+Añadimos al final del fichero unas lineas como las siguientes. La ruta del `ANDROID_SDK_ROOT` ha de ser la mostrada durante la instalación del mismo:
+```
+export ANDROID_SDK_ROOT=~/Android/Sdk/
+export PATH=$PATH:/snap/android-studio/current/android-studio/plugins/gradle/lib/
+```
+Guardamos los cambios y cerramos el editor de texto. Para hacer efectivos los cambios sin reiniciar la sesión:
+```bash
+$ source ~/.bashrc
+```
 #### Node.js con NVM
 Para la instalación de Cordova hemos de instalar el paquete **Cordova** de NPM de forma global.
 
