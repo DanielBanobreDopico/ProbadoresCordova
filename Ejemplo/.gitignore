@@ -1,0 +1,10 @@
+.DS_Store
+node_modules
+public/bundle.*
+
+# Cordova
+/src-cordova/platforms
+/src-cordova/plugins
+/src-cordova/www
+!/src-cordova/www/README.md
+src-cordova/config.xml.backup

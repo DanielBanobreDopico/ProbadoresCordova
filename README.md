@@ -94,6 +94,7 @@ Puede tomarle un buen rato:
 ```bash
 $ cordova emulate
 ```
+Se abrirá el emulador de Android. Si la aplicación no inicia dejar el emulador abierto y ejecuta el comando nuevamente. En ocasiones, el tiempo que el emulador necesita para abrir hace que la app no arranque en el primer intento.
 ### Construir el paquete
 ```bash
 $ cordova build android
@@ -102,3 +103,23 @@ Built the following apk(s):
         /home/usuario/.../proyecto/platforms/android/app/build/outputs/apk/debug/app-debug.apk
 ```
 ## Cordova plugins
+Cordova no sólo nos permite empaquetar nuestros frontend para desplegarlas como aplicaciones nativas, sino que nos proporciona acceso a capadidades de los dispositivos que normalmente están vetados al navegador.
+
+Esto se consigue mediante la adición de [plugins de Cordova](https://cordova.apache.org/plugins/). Estos plugins son pequeñas aplicaciones escritas en lenguajes nativos del dispositivo que ofrecen una interface a Cordova para que nuestro código JavaScript.
+
+### Añadiendo plugins
+```bash
+$ cordova plugin add cordova-plugin-flashlight
+$ cordova plugin
+```
+## Debug
+Desde un navegador basado en Chromium puedes abrir la dirección [brave://inspect/#devices](brave://inspect/#devices) que te dará acceso a las aplicaciones web que ejecutes en el emulador de Android o en tus dispositivos físicos en los que hayas habilitado la [depuración USB](https://developer.android.com/studio/debug/dev-options?hl=es).
+
+## Ejemplo Svelte-Cordova
+Disponemos de plantillas para iniciar fácilmente proyectos Svelte para empaquetar en Cordova. Puedes encontrarlos en GitHub. Un ejemplo es yonip/svelte-cordova-template
+```bash
+npx degit syonip/svelte-cordova-template Ejemplo
+cd Ejemplo
+npm install
+```
+Sigue las [instrucciones](https://github.com/syonip/svelte-cordova) para trabajar con Svelte dentro de una aplicación de Cordova.
