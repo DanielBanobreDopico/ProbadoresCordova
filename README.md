@@ -36,6 +36,7 @@ Añadimos al final del fichero unas lineas como las siguientes. La ruta del `AND
 ```
 export ANDROID_SDK_ROOT=~/Android/Sdk/
 export PATH=$PATH:/snap/android-studio/current/android-studio/plugins/gradle/lib/
+export PATH=$PATH:~/Android/Sdk/emulator
 ```
 Guardamos los cambios y cerramos el editor de texto. Para hacer efectivos los cambios sin reiniciar la sesión:
 ```bash
